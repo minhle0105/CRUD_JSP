@@ -49,9 +49,9 @@
           </div>
           <div class="col-md-8">
               <nav class="navbar justify-content-between" style="justify-content: center; background-color: white">
-                  <form class="form-inline" style="background-color: white; margin-left: 150px">
-                      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="width: 300px">
-                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                  <form method="post" action="/guests?ac=search" class="form-inline" style="background-color: white; margin-left: 150px">
+                      <input class="form-control mr-sm-2" name="searchName" type="search" placeholder="Search" aria-label="Search" style="width: 300px">
+                      <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
                   </form>
               </nav>
           </div>

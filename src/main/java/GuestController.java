@@ -37,6 +37,11 @@ public class GuestController extends HttpServlet {
             case "update":
                 updateGuest(request, response);
                 break;
+            case "search":
+                List<Guest> searchResult = searchGuest(request, response);
+                request.setAttribute("guests", searchResult);
+                request.getRequestDispatcher("guest/searchResult.jsp").forward(request,response);
+                break;
         }
         List<Guest> guests = getAllGuests();
 //        request.setAttribute("guests",new Guest(100,"Ha Nguyen",23));
@@ -55,6 +60,7 @@ public class GuestController extends HttpServlet {
         Guest newGuest = new Guest(id, name, age);
         guestList.add(newGuest);
     }
+
     public void deleteGuest(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("idDel"));
         for (int i = 0; i < guestList.size(); i++) {
@@ -63,6 +69,7 @@ public class GuestController extends HttpServlet {
             }
         }
     }
+
     public void updateGuest(HttpServletRequest request, HttpServletResponse response) {
         int currentId = Integer.parseInt(request.getParameter("current_id"));
         int newId = Integer.parseInt(request.getParameter("new_id"));
@@ -75,5 +82,16 @@ public class GuestController extends HttpServlet {
                 guestList.get(i).setAge(newAge);
             }
         }
+    }
+
+    public List<Guest> searchGuest(HttpServletRequest request, HttpServletResponse response){
+        List<Guest> searchResult = new ArrayList<>();
+        String searchName = request.getParameter("searchName");
+        for (int i = 0; i < guestList.size(); i++) {
+            if (guestList.get(i).getName().toLowerCase().contains(searchName.toLowerCase())) {
+                searchResult.add(guestList.get(i));
+            }
+        }
+        return searchResult;
     }
 }
