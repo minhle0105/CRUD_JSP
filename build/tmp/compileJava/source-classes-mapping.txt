@@ -1,6 +1,6 @@
-UserController.java
+controller/UserController.java
  UserController
-entity/Guest.java
- entity.Guest
-GuestController.java
+controller/GuestController.java
  GuestController
+model/Guest.java
+ model.Guest
