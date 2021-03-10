@@ -3,7 +3,7 @@ import entity.Guest;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +49,7 @@ public class GuestController extends HttpServlet {
         request.getRequestDispatcher("/guest/list.jsp")
                 .forward(request,response);
     }
+
     public static List<Guest> getAllGuests(){
         return guestList;
     }
@@ -94,4 +95,5 @@ public class GuestController extends HttpServlet {
         }
         return searchResult;
     }
+
 }
