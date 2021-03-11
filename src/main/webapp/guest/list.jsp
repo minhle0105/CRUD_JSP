@@ -36,7 +36,7 @@
                       <td>${guest.id}</td>
                       <td>${guest.name}</td>
                       <td>${guest.age}</td>
-                      <td><a href="guest/update.jsp" class="btn btn-primary">Edit</a></td>
+                      <td><a href="/guests?ac=update&idUpdate=${guest.id}" class="btn btn-primary">Edit</a></td>
                       <td><a href="/guests?ac=delete&idDel=${guest.id}" style="color: white" class="btn btn-danger">Delete</a></td>
                   </tr>
               </c:forEach>
@@ -45,7 +45,7 @@
       </div>
       <div class="row">
           <div class="col-md-4" style="justify-content: center">
-              <a href="guest/create.jsp" class="btn btn-success" style="width: 200px; margin-left: 100px">Add</a>
+              <a href="/guests?ac=create" class="btn btn-success" style="width: 200px; margin-left: 100px">Add</a>
           </div>
           <div class="col-md-8">
               <nav class="navbar justify-content-between" style="justify-content: center; background-color: white">

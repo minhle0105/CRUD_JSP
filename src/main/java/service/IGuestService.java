@@ -2,6 +2,7 @@ package service;
 
 import model.Guest;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,12 +10,12 @@ public interface IGuestService {
 
     public List<Guest> getAllGuests();
 
-    public void addNewGuest(Guest guest);
+    public void addNewGuest(Guest guest) throws SQLException;
 
-    public void deleteGuest(int id);
+    public boolean deleteGuest(int id) throws SQLException;
 
-    public void updateGuest(int id, int newID, String newName, int newAge);
+    public boolean updateGuest(Guest guest) throws SQLException;
 
-    public List<Guest> searchGuest(String searchName);
+    public Guest searchGuest(int id);
 
 }

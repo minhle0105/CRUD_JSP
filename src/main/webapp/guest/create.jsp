@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<div class="container" style="margin-top: 20px; box-shadow: 3px 3px 10px 10px green; height: 50%"">
-    <form action="/guests?ac=create" method="post" style="padding-top: 50px">
+<div class="container" style="margin-top: 20px; box-shadow: 3px 3px 10px 10px green; height: 50%">
+    <form method="post" style="padding-top: 50px">
         <div class="form-row">
             <div class="form-group col-md-12">
                 <label for="inputEmail4">ID</label>
