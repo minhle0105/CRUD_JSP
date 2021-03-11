@@ -1,4 +1,8 @@
+package controller;
+
 import model.Guest;
+import service.GuestServiceImpl;
+import service.IGuestService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -9,7 +13,8 @@ import java.util.List;
 
 @WebServlet(name = "GuestController", urlPatterns = "/guests")
 public class GuestController extends HttpServlet {
-    static List<Guest> guestList = new ArrayList<>();
+    private final IGuestService guestService = new GuestServiceImpl();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         handle(request,response);
@@ -43,32 +48,26 @@ public class GuestController extends HttpServlet {
                 request.getRequestDispatcher("guest/searchResult.jsp").forward(request,response);
                 break;
         }
-        List<Guest> guests = getAllGuests();
+        List<Guest> guests = guestService.getAllGuests();
 //        request.setAttribute("guests",new Guest(100,"Ha Nguyen",23));
         request.setAttribute("guests", guests);
         request.getRequestDispatcher("/guest/list.jsp")
                 .forward(request,response);
     }
 
-    public static List<Guest> getAllGuests(){
-        return guestList;
-    }
+
 
     public void addNewGuest(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         int age = Integer.parseInt(request.getParameter("age"));
         Guest newGuest = new Guest(id, name, age);
-        guestList.add(newGuest);
+        guestService.addNewGuest(newGuest);
     }
 
     public void deleteGuest(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("idDel"));
-        for (int i = 0; i < guestList.size(); i++) {
-            if (guestList.get(i).getId() == id) {
-                guestList.remove(i);
-            }
-        }
+        guestService.deleteGuest(id);
     }
 
     public void updateGuest(HttpServletRequest request, HttpServletResponse response) {
@@ -76,24 +75,12 @@ public class GuestController extends HttpServlet {
         int newId = Integer.parseInt(request.getParameter("new_id"));
         String newName = request.getParameter("new_name");
         int newAge = Integer.parseInt(request.getParameter("new_age"));
-        for (int i = 0; i < guestList.size(); i++) {
-            if (guestList.get(i).getId()==currentId) {
-                guestList.get(i).setId(newId);
-                guestList.get(i).setName(newName);
-                guestList.get(i).setAge(newAge);
-            }
-        }
+        guestService.updateGuest(currentId, newId, newName, newAge);
     }
 
     public List<Guest> searchGuest(HttpServletRequest request, HttpServletResponse response){
-        List<Guest> searchResult = new ArrayList<>();
         String searchName = request.getParameter("searchName");
-        for (int i = 0; i < guestList.size(); i++) {
-            if (guestList.get(i).getName().toLowerCase().contains(searchName.toLowerCase())) {
-                searchResult.add(guestList.get(i));
-            }
-        }
-        return searchResult;
+        return guestService.searchGuest(searchName);
     }
 
 }
