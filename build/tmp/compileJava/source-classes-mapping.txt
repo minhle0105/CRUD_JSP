@@ -4,7 +4,7 @@ model/Guest.java
  model.Guest
 service/IGuestService.java
  service.IGuestService
-controller/GuestController.java
- controller.GuestController
 service/GuestServiceImpl.java
  service.GuestServiceImpl
+controller/GuestController.java
+ controller.GuestController

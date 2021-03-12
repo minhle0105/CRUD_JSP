@@ -26,7 +26,7 @@ public class GuestController extends HttpServlet {
         try {
             switch (action) {
                 case "create" -> showNewForm(request, response);
-                case "edit" -> showEditForm(request, response);
+                case "update" -> showEditForm(request, response);
                 case "delete" -> deleteGuest(request, response);
                 default -> listGuest(request, response);
             }
@@ -59,7 +59,7 @@ public class GuestController extends HttpServlet {
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("idUpdate"));
         Guest existingGuest = guestService.searchGuest(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("guest/update.jsp");
         request.setAttribute("guests", existingGuest);
@@ -80,8 +80,7 @@ public class GuestController extends HttpServlet {
         int age = Integer.parseInt(request.getParameter("age"));
         Guest newGuest = new Guest(id, name, age);
         guestService.addNewGuest(newGuest);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("guest/create.jsp");
-        dispatcher.forward(request, response);
+        response.sendRedirect("/guests");
     }
 
     public void deleteGuest(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
@@ -99,8 +98,7 @@ public class GuestController extends HttpServlet {
         int newAge = Integer.parseInt(request.getParameter("new_age"));
         Guest guestNewInfo = new Guest(newId, newName, newAge);
         guestService.updateGuest(guestNewInfo);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("guest/update.jsp");
-        dispatcher.forward(request, response);
+        response.sendRedirect("/guests");
     }
 
 }
